@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 
+// FIRST VERSION
+
 // Instantiate the JWT token validation middleware
 // const isAuthenticated = jwt({
 //   secret: process.env.TOKEN_SECRET,
@@ -28,15 +30,39 @@ const jwt = require("jsonwebtoken");
 //   return null;
 // }
 
-const isAuthenticated = (req, res, next) => {
-  //   const token = req.headers.authorization;
-  const token = req.headers.authorization.split(" ")[1];
+// SECOND VERSION
 
-  if (!token) return res.status(400).json({ message: "Token not found" });
+// const isAuthenticated = (req, res, next) => {
+//   //   const token = req.headers.authorization;
+//   const token = req.headers.authorization.split(" ")[1];
+
+//   if (!token) return res.status(400).json({ message: "Token not found" });
+//   try {
+//     const tokenInfo = jwt.verify(token, process.env.TOKEN_SECRET);
+//     console.log(tokenInfo);
+//     //If you have req.payload, change line 12 to:
+//     //req.payload = tokenInfo;
+//     req.payload = tokenInfo;
+//     next();
+//   } catch (error) {
+//     return res.json(error);
+//   }
+// };
+
+// THIRD VERSION
+
+const isAuthenticated = (req, res, next) => {
+  const token = req.headers.authorization;
+  //NOTE: if your token authentication is failing in Postman, uncomment the line below, and comment out the line above
+  // const token = req.headers.authorization?.split(" ")[1];
+  if (!token || token === "null") {
+    console.log("NO TOKEN");
+    return res.status(400).json({ message: "Token not found" });
+  }
   try {
     const tokenInfo = jwt.verify(token, process.env.TOKEN_SECRET);
     console.log(tokenInfo);
-    //If you have req.payload, change line 12 to:
+    //If you have req.payload, change req.user to:
     //req.payload = tokenInfo;
     req.payload = tokenInfo;
     next();

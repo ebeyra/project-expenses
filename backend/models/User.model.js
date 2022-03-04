@@ -4,14 +4,15 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
-    fullName: String,
-    image: String
+    firstName: String,
+    lastName: String,
+    image: String,
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

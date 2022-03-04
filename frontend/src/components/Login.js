@@ -1,5 +1,6 @@
 import React from "react";
 import { get, post } from "../http/service";
+import fakelogo from "../public/assets/images/fakelogo.svg";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
@@ -13,11 +14,7 @@ const Login = () => {
     })
       .then((results) => {
         console.log("You are logged in!!!", results.data);
-
         localStorage.setItem("token", results.data);
-
-        // let thing = localStorage.getItem("token");
-        // console.log("This was stored in our localStorage", thing);
       })
       .catch((err) => {
         console.error(err.message);
@@ -40,16 +37,61 @@ const Login = () => {
       });
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    console.log("You have logged out");
+  };
+
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={loginUser}>
-        <input value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Log in</button>
-      </form>
-      <button onClick={checkIfLoggedIn}>See if you are logged in</button>
-      <button onClick={checkToken}>check if token is stored</button>
+    <div className="container d-flex justify-content-center my-5">
+      <main className="form-signin justify-center" style={{ minWidth: "30%" }}>
+        <form className="w-200" onSubmit={loginUser}>
+          <img
+            className="mb-4"
+            src={fakelogo}
+            alt="logo"
+            width="72"
+            height="57"
+          />
+          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+
+          <div className="form-floating">
+            <input
+              type="text"
+              className="form-control"
+              id="floatingInput"
+              placeholder="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label htmlFor="floatingInput">Username</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
+
+          <div className="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me" /> Remember me
+            </label>
+          </div>
+          <button className="w-100 btn btn-lg btn-success" type="submit">
+            Sign in
+          </button>
+          <p className="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+        <button onClick={checkIfLoggedIn}>See if you are logged in</button>
+        <button onClick={checkToken}>check if token is stored</button>
+        <button onClick={logout}>Logout</button>
+      </main>
     </div>
   );
 };
