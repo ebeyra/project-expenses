@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import statistics from "../public/assets/images/statistics.svg";
+import statistics from "../../assets/images/statistics.svg";
 
 const Main = () => {
   return (

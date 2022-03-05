@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Main from "./Main";
+import MainBody from "./layout/MainBody";
 
 const Home = () => {
   return (
     <div>
-      <Main />
+      <MainBody />
     </div>
   );
 };

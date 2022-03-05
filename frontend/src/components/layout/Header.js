@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import fakelogo from "../public/assets/images/fakelogo.svg";
+import fakelogo from "../../assets/images/fakelogo.svg";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-xl navbar-dark bg-success p-3">
+    <nav className="navbar navbar-expand-xl navbar-dark bg-success p-2">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand" id="top">
+        <Link to="/" className="navbar-brand h5" id="top">
           <img src={fakelogo} alt="logo" className="mx-2" />
           Expense App
         </Link>
@@ -21,12 +21,12 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link to="/signup" className="nav-link">
+              <Link to="/signup" className="nav-link h5">
                 Sign Up
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-link">
+              <Link to="/login" className="nav-link h5">
                 Log In
               </Link>
             </li>

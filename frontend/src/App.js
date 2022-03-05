@@ -4,8 +4,10 @@ import axios from "axios";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import Profile from "./components/Profile";
+import NoAuth from "./components/NoAuth";
 
 function App() {
   return (
@@ -13,8 +15,10 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/noauth" element={<NoAuth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </div>

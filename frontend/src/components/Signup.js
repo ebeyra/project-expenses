@@ -1,5 +1,7 @@
 import React from "react";
-import fakelogo from "../public/assets/images/fakelogo.svg";
+import fakelogo from "../assets/images/fakelogo.svg";
+import { get, post } from "../http/service";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = React.useState("");
@@ -7,9 +9,28 @@ const Signup = () => {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
 
+  const navigate = useNavigate();
+
+  const signUpUser = (e) => {
+    e.preventDefault();
+    post("/auth/signup", {
+      username,
+      password,
+      firstName,
+      lastName,
+    })
+      .then((results) => {
+        localStorage.setItem("token", results.data);
+        navigate("/profile");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
   return (
     <div className="container d-flex justify-content-center p-5">
-      <form style={{ width: "450px" }}>
+      <form style={{ width: "450px" }} onSubmit={signUpUser}>
         <img
           className="mb-4"
           src={fakelogo}
@@ -29,7 +50,7 @@ const Signup = () => {
                     width="20"
                     height="24"
                     fill="currentColor"
-                    class="bi bi-person-fill"
+                    className="bi bi-person-fill"
                     viewBox="0 0 16 16"
                   >
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -42,6 +63,7 @@ const Signup = () => {
                 id="validationDefaultUsername"
                 placeholder="Username"
                 value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
@@ -54,6 +76,7 @@ const Signup = () => {
               id="validationDefault03"
               placeholder="Password"
               value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -65,6 +88,7 @@ const Signup = () => {
               id="validationDefault01"
               placeholder="First name"
               value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="col-md-4 mb-3 w-100 text-start">
@@ -75,12 +99,14 @@ const Signup = () => {
               id="validationDefault02"
               placeholder="Last name"
               value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
         </div>
-        <button className="btn btn-success" type="submit">
+        <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
           Sign Up
         </button>
+        <p className="mt-5 mb-3 text-muted">&copy; 2021</p>
       </form>
     </div>
   );

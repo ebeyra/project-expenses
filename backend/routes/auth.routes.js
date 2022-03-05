@@ -21,6 +21,10 @@ router.get("/", (req, res, next) => {
   res.json("Login or Sign up");
 });
 
+router.get("/loggedin", isAuthenticated, (req, res) => {
+  res.json("You are logged in");
+});
+
 // Sign up process
 
 router.get("/signup", (req, res, next) => {

@@ -1,10 +1,13 @@
 import React from "react";
 import { get, post } from "../http/service";
-import fakelogo from "../public/assets/images/fakelogo.svg";
+import fakelogo from "../assets/images/fakelogo.svg";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const navigate = useNavigate();
 
   const loginUser = (e) => {
     e.preventDefault();
@@ -13,8 +16,8 @@ const Login = () => {
       password,
     })
       .then((results) => {
-        console.log("You are logged in!!!", results.data);
         localStorage.setItem("token", results.data);
+        navigate("/expenses");
       })
       .catch((err) => {
         console.error(err.message);
@@ -53,7 +56,7 @@ const Login = () => {
             width="72"
             height="57"
           />
-          <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 className="h3 mb-3 fw-normal">Sign in</h1>
 
           <div className="form-floating">
             <input
@@ -63,6 +66,7 @@ const Login = () => {
               placeholder="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
             <label htmlFor="floatingInput">Username</label>
           </div>
@@ -74,6 +78,7 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
