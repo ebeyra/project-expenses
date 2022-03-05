@@ -8,6 +8,9 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Profile from "./components/Profile";
 import NoAuth from "./components/NoAuth";
+import Hub from "./components/Hub";
+import Expenses from "./components/Expenses";
+import Budget from "./components/Budget";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/hub" element={<Hub />} />
+        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/budget" element={<Budget />} />
       </Routes>
       <Footer />
     </div>

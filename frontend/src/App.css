@@ -43,3 +43,7 @@
 .footer {
   margin-top: auto;
 }
+
+.full-screen > * {
+  min-height: calc(100vh - 170px);
+}

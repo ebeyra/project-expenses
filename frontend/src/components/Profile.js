@@ -1,6 +1,7 @@
 import React from "react";
 import { get, post } from "../http/service";
 import { useNavigate } from "react-router-dom";
+import Hub from "./Hub";
 
 const Profile = () => {
   const navigate = useNavigate("");
@@ -16,7 +17,11 @@ const Profile = () => {
       });
   }, []);
 
-  return <div>Profile page</div>;
+  return (
+    <div>
+      Edit your profile?
+    </div>
+  );
 };
 
 export default Profile;
