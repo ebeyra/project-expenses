@@ -106,7 +106,7 @@ const Signup = () => {
         <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
           Sign Up
         </button>
-        <p className="mt-5 mb-3 text-muted">&copy; 2021</p>
+        <p className="mt-5 mb-3 text-muted">&copy; 2022</p>
       </form>
     </div>
   );

@@ -30,10 +30,3 @@ export const post = (route, body) => {
     },
   });
 };
-
-// Logout function I want to have global
-
-export const logout = () => {
-  localStorage.removeItem("token");
-  console.log("You have logged out");
-};

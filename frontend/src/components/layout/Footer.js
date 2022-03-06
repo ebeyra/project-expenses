@@ -22,7 +22,7 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <p className="text-center text-light">&copy; 2021 Beyra, Inc</p>
+        <p className="text-center text-light">&copy; 2022 Beyra, Inc</p>
       </footer>
     </div>
   );

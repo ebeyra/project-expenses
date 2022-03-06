@@ -1,15 +1,23 @@
 import React from "react";
 import { get, post } from "../http/service";
 import { useNavigate } from "react-router-dom";
-import Hub from "./Hub";
+import { Link } from "react-router-dom";
+import { logout } from "./utility/globalfunctions";
 
 const Profile = () => {
+  const [userInfo, setUserInfo] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+
   const navigate = useNavigate("");
 
   React.useEffect(() => {
-    get("/expenses")
+    get("/users/profile")
       .then((results) => {
-        console.log("Are you logged in?", results.data);
+        setUserInfo(results.data.foundUser);
       })
       .catch((err) => {
         console.error(err.message);
@@ -17,9 +25,196 @@ const Profile = () => {
       });
   }, []);
 
+  React.useEffect(() => {}, []);
+
+  const updateUser = (e) => {
+    e.preventDefault();
+    post(`/users/${userInfo._id}/edit`, {
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+    })
+      .then((results) => {
+        console.log("User updated: ", results);
+        navigate("/hub");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
   return (
-    <div>
-      Edit your profile?
+    <div className="container-fluid">
+      <div className="row flex-nowrap">
+        <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
+          <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
+            <ul
+              className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+              id="menu"
+            >
+              {/* <li className="nav-item">
+                        <a href="#" className="nav-link align-middle px-0">
+                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline text-white">Home</span>
+                        </a>
+                    </li> */}
+              <li>
+                <Link to="/hub" className="nav-link px-0 align-middle">
+                  <i className="fs-4 bi-speedometer2 text-white"></i>{" "}
+                  <span className="ms-1 d-none d-sm-inline text-white">
+                    Summary
+                  </span>{" "}
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#submenu2"
+                  data-bs-toggle="collapse"
+                  className="nav-link px-0 align-middle "
+                >
+                  <i className="fs-4 bi-journal-text text-white"></i>{" "}
+                  <span className="ms-1 d-none d-sm-inline text-white">
+                    Expenses
+                  </span>
+                </a>
+                <ul
+                  className="collapse nav flex-column ms-1"
+                  id="submenu2"
+                  data-bs-parent="#menu"
+                >
+                  <li className="w-100">
+                    <Link to="/budget" className="nav-link px-0 text-end">
+                      {" "}
+                      <span className="d-none d-sm-inline text-white">
+                        Budget
+                      </span>{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/transactions" className="nav-link px-0 text-end">
+                      {" "}
+                      <span className="d-none d-sm-inline text-white">
+                        Transactions
+                      </span>{" "}
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link to="/profile" className="nav-link px-0 align-middle">
+                  <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}
+                  <span className="ms-1 d-none d-sm-inline text-white">
+                    Profile
+                  </span>{" "}
+                </Link>
+              </li>
+            </ul>
+            <hr />
+            <div className="dropdown pb-4">
+              <a
+                href="#none"
+                className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser1"
+                data-bs-toggle="dropdown"
+              >
+                <i className="fs-4 bi-person-circle text-white me-2"></i>
+                <span className="d-none d-sm-inline mx-1">{userInfo.firstName ? userInfo.firstName : "Name"}</span>
+              </a>
+              <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li>
+                  <a className="dropdown-item" href="#none" onClick={logout}>
+                    Sign out
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="col py-3">
+          <div className="container px-4 mt-4" style={{ maxWidth: "800px" }}>
+            <div className="row">
+              <div className="card mb-4">
+                <div className="card-header">Account Details</div>
+                <div className="card-body">
+                  <form onSubmit={updateUser}>
+                    <div className="row gx-3 mb-3">
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputFirstName">
+                          First name
+                        </label>
+                        <input
+                          className="form-control"
+                          id="inputFirstName"
+                          type="text"
+                          placeholder={userInfo?.firstName}
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="small mb-1" htmlFor="inputLastName">
+                          Last name
+                        </label>
+                        <input
+                          className="form-control"
+                          id="inputLastName"
+                          type="text"
+                          placeholder={userInfo?.lastName}
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="inputEmailAddress">
+                        Email address
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputEmailAddress"
+                        type="email"
+                        placeholder={userInfo?.email}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="inputUsername">
+                        Username
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputUsername"
+                        type="text"
+                        placeholder={userInfo?.username}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" htmlFor="inputPassword">
+                        Password
+                      </label>
+                      <input
+                        className="form-control"
+                        id="inputPassword"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <button className="btn btn-success mt-3 mb-3" type="button">
+                      Save changes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

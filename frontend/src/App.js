@@ -9,7 +9,7 @@ import Footer from "./components/layout/Footer";
 import Profile from "./components/Profile";
 import NoAuth from "./components/NoAuth";
 import Hub from "./components/Hub";
-import Expenses from "./components/Expenses";
+import Transactions from "./components/Transactions";
 import Budget from "./components/Budget";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/hub" element={<Hub />} />
-        <Route path="/expenses" element={<Expenses />} />
+        <Route path="/transactions" element={<Transactions />} />
         <Route path="/budget" element={<Budget />} />
       </Routes>
       <Footer />
