@@ -35,7 +35,7 @@ router.get("/profile/:userId", isAuthenticated, (req, res, next) => {
 
 // Update account details
 
-router.get("/profile/:userId/edit", isAuthenticated, (req, res, next) => {
+router.get("/profile/edit", isAuthenticated, (req, res, next) => {
   User.findById(req.params.userId)
     .then((userDetails) => {
       res.json({
@@ -53,20 +53,43 @@ router.get("/profile/:userId/edit", isAuthenticated, (req, res, next) => {
     });
 });
 
-router.post("/profile/:userId/edit", isAuthenticated, (req, res, next) => {
+// router.post("/profile/:userId/edit", isAuthenticated, (req, res, next) => {
+//   if (req.body.password) {
+//     const salt = bcrypt.genSaltSync(saltRounds);
+//     const hashedPass = bcrypt.hashSync(req.body.password, salt);
+//     req.body.password = hashedPass;
+//   }
+//   User.findByIdAndUpdate(
+//     req.params.userId,
+//     {
+//       ...req.body,
+//     },
+//     { new: true }
+//   )
+//     .then((updatedDetails) => {
+//       res.json({ message: "User details updated", updatedDetails });
+//     })
+//     .catch((err) => {
+//       res.status(500).json(err.message);
+//     });
+// });
+
+router.post("/profile/edit", isAuthenticated, (req, res, next) => {
+  console.log(req.body);
   if (req.body.password) {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPass = bcrypt.hashSync(req.body.password, salt);
     req.body.password = hashedPass;
   }
   User.findByIdAndUpdate(
-    req.params.userId,
+    req.payload._id,
     {
       ...req.body,
     },
     { new: true }
   )
     .then((updatedDetails) => {
+      console.log(updatedDetails);
       res.json({ message: "User details updated", updatedDetails });
     })
     .catch((err) => {
@@ -85,5 +108,7 @@ router.post("/profile/:userId/delete", isAuthenticated, (req, res, next) => {
       res.status(500).json(err.message);
     });
 });
+
+// :params replaced by token
 
 module.exports = router;

@@ -20,10 +20,10 @@ const Main = () => {
             </div>
             <div className="col-lg-6">
               <h1 className="display-5 fw-bold lh-1 mb-3 text-start">
-                Stay in Control
+                Achieve Your Goals
               </h1>
               <p className="lead text-start">
-                With Expense App, take charge of your spending with our
+                With Iron Money, take charge of your spending with our
                 easy-to-use expense tracking tools. Create a budget, add
                 transactions, and view your spending habits.
               </p>
@@ -69,9 +69,7 @@ const Main = () => {
               </div>
               <h2 className="text-start py-3">Budget</h2>
               <p className="text-start">
-                Use our budget creation guide to help you get started with
-                monthly needs. Add future purchase goals to help identify what
-                is possible.
+                Use our budget creation guide to help you get started. Set individual targets for several of the most common budget categories.
               </p>
             </div>
           </div>
@@ -118,7 +116,7 @@ const Main = () => {
               </div>
               <h2 className="text-start py-3">At-A-Glance</h2>
               <p className="text-start">
-                Stay on top of your goals with at-a-glance views income,
+                Stay on top of your goals with at-a-glance views of income,
                 expenses, recent transaction history, and progress towards your
                 goals.
               </p>

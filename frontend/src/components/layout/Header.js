@@ -8,7 +8,7 @@ const Header = () => {
       <div className="container-fluid">
         <Link to="/" className="navbar-brand h5" id="top">
           <img src={fakelogo} alt="logo" className="mx-2" />
-          Expense App
+          Iron Money
         </Link>
         <button
           className="navbar-toggler"

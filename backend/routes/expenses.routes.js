@@ -42,6 +42,7 @@ router.post("/new-transaction", isAuthenticated, (req, res, next) => {
     category: req.body.category,
     amount: req.body.amount,
     memo: req.body.memo,
+    product: req.body.product,
     createdBy: req.payload._id,
   })
     .then((newTransaction) => {
@@ -148,7 +149,7 @@ router.post(
     Transaction.findByIdAndUpdate(
       req.params.transactionId,
       {
-        ...req.body
+        ...req.body,
       },
       { new: true }
     )

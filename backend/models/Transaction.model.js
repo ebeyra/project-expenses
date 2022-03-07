@@ -28,6 +28,7 @@ const transactionSchema = new Schema(
       type: String,
       default: "Unspecified transaction",
     },
+    product: [String],
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",

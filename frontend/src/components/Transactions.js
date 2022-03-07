@@ -21,23 +21,24 @@ const Transactions = () => {
       <tr key={transactions._id}>
         <td className="align-middle">{transactions.date}</td>
         <td className="align-middle">{transactions.category}</td>
-        <td className="align-middle">{transactions.amount}</td>
+        <td className="align-middle">${transactions.amount}</td>
         <td className="align-middle">{transactions.memo}</td>
+        <td className="align-middle">{transactions.product}</td>
         <td>
-          <button
-            type="button"
-            className="btn btn-outline-secondary me-2"
+          <Link
+            to={`/transaction/${transactions._id}`}
+            className="btn btn-outline-success me-2 text-decoration-none"
             style={{ fontSize: "13px" }}
           >
             Edit
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-danger ms-2"
+          </Link>
+          <Link
+            to={`/transaction/${transactions._id}/delete`}
+            className="btn btn-outline-danger me-2 text-decoration-none"
             style={{ fontSize: "13px" }}
           >
             Delete
-          </button>
+          </Link>
         </td>
       </tr>
     );
@@ -129,24 +130,25 @@ const Transactions = () => {
     //         </div>
     //       </div>
     //     </div>
-        <div className="col py-3">
-          <div className="container">
-            <div className="row">
-              <table className="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th style={{ minWidth: "120px" }}>Memo</th>
-                    <th style={{ minWidth: "150px" }}>Action</th>
-                  </tr>
-                </thead>
-                <tbody>{transactionList}</tbody>
-              </table>
-            </div>
-          </div>
+    <div className="col py-3">
+      <div className="container">
+        <div className="row">
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style={{ minWidth: "120px" }}>Date</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th style={{ minWidth: "120px" }}>Memo</th>
+                <th style={{ minWidth: "120px" }}>Product</th>
+                <th style={{ minWidth: "150px" }}>Action</th>
+              </tr>
+            </thead>
+            <tbody>{transactionList}</tbody>
+          </table>
         </div>
+      </div>
+    </div>
     //   </div>
     // </div>
   );

@@ -32,7 +32,7 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, firstName, lastName } = req.body;
 
   if (!username) {
     return res
@@ -74,6 +74,8 @@ router.post("/signup", (req, res) => {
         return User.create({
           username,
           password: hashedPassword,
+          firstName,
+          lastName,
         });
       })
       .then((user) => {

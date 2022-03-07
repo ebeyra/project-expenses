@@ -7,20 +7,19 @@ import { post, get } from "../http/service";
 import { useNavigate } from "react-router-dom";
 
 const Hub = () => {
+  const [userInfo, setUserInfo] = React.useState("");
+  const navigate = useNavigate("");
 
-    const [userInfo, setUserInfo] = React.useState("");
-    const navigate = useNavigate("");
-
-    React.useEffect(() => {
-        get("/users/profile")
-          .then((results) => {
-            setUserInfo(results.data.foundUser);
-          })
-          .catch((err) => {
-            console.error(err.message);
-            navigate("/noauth");
-          });
-      }, []);
+  React.useEffect(() => {
+    get("/users/profile")
+      .then((results) => {
+        setUserInfo(results.data.foundUser);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        navigate("/noauth");
+      });
+  }, []);
 
   return (
     <div className="container-fluid">
@@ -31,11 +30,6 @@ const Hub = () => {
               className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
             >
-              {/* <li className="nav-item">
-                        <a href="#" className="nav-link align-middle px-0">
-                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline text-white">Home</span>
-                        </a>
-                    </li> */}
               <li>
                 <Link to="/hub" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-speedometer2 text-white"></i>{" "}
@@ -69,7 +63,7 @@ const Hub = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/transactions" className="nav-link px-0 text-end">
+                    <Link to="/transaction/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Transactions
@@ -96,13 +90,15 @@ const Hub = () => {
                 data-bs-toggle="dropdown"
               >
                 <i className="fs-4 bi-person-circle text-white me-2"></i>
-                <span className="d-none d-sm-inline mx-1">{userInfo.firstName ? userInfo.firstName : "Name"}</span>
+                <span className="d-none d-sm-inline mx-1">
+                  {userInfo?.firstName ? userInfo.firstName : "Name"}
+                </span>
               </a>
               <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
                 <li>
-                  <a className="dropdown-item" href="#none" onClick={logout}>
+                  <Link to="/" className="dropdown-item" onClick={logout}>
                     Sign out
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

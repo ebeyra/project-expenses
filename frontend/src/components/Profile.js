@@ -25,11 +25,10 @@ const Profile = () => {
       });
   }, []);
 
-  React.useEffect(() => {}, []);
-
   const updateUser = (e) => {
     e.preventDefault();
-    post(`/users/${userInfo._id}/edit`, {
+    // let filteredObject = Object.fromEntries(Object.entries(obj).filter(([key, value]) => value));
+    post(`/users/profile/edit`, {
       username,
       password,
       firstName,
@@ -119,13 +118,15 @@ const Profile = () => {
                 data-bs-toggle="dropdown"
               >
                 <i className="fs-4 bi-person-circle text-white me-2"></i>
-                <span className="d-none d-sm-inline mx-1">{userInfo.firstName ? userInfo.firstName : "Name"}</span>
+                <span className="d-none d-sm-inline mx-1">
+                  {userInfo?.firstName ? userInfo.firstName : "Name"}
+                </span>
               </a>
               <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
                 <li>
-                  <a className="dropdown-item" href="#none" onClick={logout}>
+                  <Link to="/" className="dropdown-item" onClick={logout}>
                     Sign out
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -147,7 +148,11 @@ const Profile = () => {
                           className="form-control"
                           id="inputFirstName"
                           type="text"
-                          placeholder={userInfo?.firstName}
+                          placeholder={
+                            userInfo?.firstName
+                              ? userInfo.firstName
+                              : "First Name"
+                          }
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                         />
@@ -160,7 +165,9 @@ const Profile = () => {
                           className="form-control"
                           id="inputLastName"
                           type="text"
-                          placeholder={userInfo?.lastName}
+                          placeholder={
+                            userInfo?.lastName ? userInfo.lastName : "Last Name"
+                          }
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                         />
@@ -174,7 +181,7 @@ const Profile = () => {
                         className="form-control"
                         id="inputEmailAddress"
                         type="email"
-                        placeholder={userInfo?.email}
+                        placeholder={userInfo?.email ? userInfo.email : "Email"}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -187,7 +194,9 @@ const Profile = () => {
                         className="form-control"
                         id="inputUsername"
                         type="text"
-                        placeholder={userInfo?.username}
+                        placeholder={
+                          userInfo?.username ? userInfo.username : "Username"
+                        }
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
@@ -205,7 +214,7 @@ const Profile = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                    <button className="btn btn-success mt-3 mb-3" type="button">
+                    <button className="btn btn-success mt-3 mb-3" type="submit">
                       Save changes
                     </button>
                   </form>
