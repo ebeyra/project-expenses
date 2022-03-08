@@ -48,7 +48,7 @@ const CreateBudget = () => {
     })
       .then((results) => {
         console.log("Budget created: ", results);
-        navigate("/hub");
+        navigate("/transaction/create");
       })
       .catch((err) => {
         console.error(err.message);

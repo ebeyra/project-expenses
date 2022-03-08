@@ -21,7 +21,7 @@ const Signup = () => {
     })
       .then((results) => {
         localStorage.setItem("token", results.data);
-        navigate("/hub");
+        navigate("/budget/create");
       })
       .catch((err) => {
         console.error(err.message);
