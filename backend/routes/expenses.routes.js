@@ -121,7 +121,7 @@ router.get("/budgets/:budgetId", isAuthenticated, (req, res, next) => {
 // Edit a transaction
 
 router.get(
-  "/transactions/:transactionId/edit",
+  "/transactions/edit",
   isAuthenticated,
   (req, res, next) => {
     Transaction.findById(req.params.transactionId)

@@ -5,14 +5,32 @@ import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 
 const CreateBudget = () => {
-const [userInfo, setUserInfo] = React.useState("");
-  const [date, setDate] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [amount, setAmount] = React.useState("");
-  const [memo, setMemo] = React.useState("");
-  const [product, setProduct] = React.useState("");
+  const [userInfo, setUserInfo] = React.useState("");
+  const [income, setIncome] = React.useState("");
+  const [auto, setAuto] = React.useState("");
+  const [creditCard, setCreditCard] = React.useState("");
+  const [entertainment, setEntertainment] = React.useState("");
+  const [groceries, setGroceries] = React.useState("");
+  const [internet, setInternet] = React.useState("");
+  const [mobile, setMobile] = React.useState("");
+  const [rent, setRent] = React.useState("");
+  const [streaming, setStreaming] = React.useState("");
+  const [utilities, setUtilities] = React.useState("");
+  const [other, setOther] = React.useState("");
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    get("/users/profile")
+      .then((results) => {
+        setUserInfo(results.data.foundUser);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        navigate("/noauth");
+      });
+  }, []);
+
   return (
     <div>
       <div className="container-xl px-4 mt-3" style={{ maxWidth: "1100px" }}>

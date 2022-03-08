@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 import { post, get } from "../http/service";
+import { categoryEnum } from "./utility/globalfunctions";
+import { categoryList } from "./utility/globalfunctions";
 
 const EditTransaction = () => {
   const [userInfo, setUserInfo] = React.useState("");
@@ -47,28 +49,6 @@ const EditTransaction = () => {
       });
   };
 
-  const categoryEnum = [
-    "Auto",
-    "Credit Card",
-    "Entertainment",
-    "Groceries",
-    "Internet",
-    "Mobile",
-    "Mortgage/Rent",
-    "Refund",
-    "Salary",
-    "Streaming",
-    "Utilities",
-    "Other",
-  ];
-  const categoryList = categoryEnum.map((eachCategory) => {
-    return (
-      <option value={eachCategory} key={eachCategory}>
-        {eachCategory}
-      </option>
-    );
-  });
-
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -103,7 +83,10 @@ const EditTransaction = () => {
                   data-bs-parent="#menu"
                 >
                   <li className="w-100">
-                    <Link to="/budget/create" className="nav-link px-0 text-end">
+                    <Link
+                      to="/budget/create"
+                      className="nav-link px-0 text-end"
+                    >
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget

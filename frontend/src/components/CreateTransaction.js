@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { post, get } from "../http/service";
 import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
+import { categoryEnum } from "./utility/globalfunctions";
 
 const CreateTransaction = () => {
   const [userInfo, setUserInfo] = React.useState("");
@@ -43,20 +44,6 @@ const CreateTransaction = () => {
       });
   };
 
-  const categoryEnum = [
-    "Auto",
-    "Credit Card",
-    "Entertainment",
-    "Groceries",
-    "Internet",
-    "Mobile",
-    "Mortgage/Rent",
-    "Refund",
-    "Salary",
-    "Streaming",
-    "Utilities",
-    "Other",
-  ];
   const categoryList = categoryEnum.map((eachCategory) => {
     return (
       <option value={eachCategory} key={eachCategory}>

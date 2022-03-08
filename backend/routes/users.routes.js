@@ -36,15 +36,15 @@ router.get("/profile/:userId", isAuthenticated, (req, res, next) => {
 // Update account details
 
 router.get("/profile/edit", isAuthenticated, (req, res, next) => {
-  User.findById(req.params.userId)
+  User.findById(req.payload._id)
     .then((userDetails) => {
       res.json({
         message: "Populated info to update",
         accountInfo: {
           username: userDetails.username,
           password: userDetails.password,
-          fullName: userDetails.fullName,
-          image: userDetails.image,
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
         },
       });
     })
@@ -75,7 +75,6 @@ router.get("/profile/edit", isAuthenticated, (req, res, next) => {
 // });
 
 router.post("/profile/edit", isAuthenticated, (req, res, next) => {
-  console.log(req.body);
   if (req.body.password) {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPass = bcrypt.hashSync(req.body.password, salt);
@@ -99,8 +98,8 @@ router.post("/profile/edit", isAuthenticated, (req, res, next) => {
 
 // Delete account
 
-router.post("/profile/:userId/delete", isAuthenticated, (req, res, next) => {
-  User.findByIdAndRemove(req.params.userId)
+router.post("/profile/delete", isAuthenticated, (req, res, next) => {
+  User.findByIdAndRemove(req.payload._id)
     .then((userToRemove) => {
       res.json({ message: "User removed", userToRemove });
     })
