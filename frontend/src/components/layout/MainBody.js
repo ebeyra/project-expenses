@@ -28,22 +28,18 @@ const Main = () => {
                 transactions, and view your spending habits.
               </p>
               <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button
-                  type="button"
-                  className="btn btn-success btn-lg px-4 me-md-2"
+                <Link
+                  to="/signup"
+                  className="text-decoration-none text-light btn btn-success btn-lg px-4 me-md-2"
                 >
-                  <Link
-                    to="/signup"
-                    className="text-decoration-none text-light"
-                  >
-                    Sign up
-                  </Link>
-                </button>
-                <button type="button" className="btn btn-secondary btn-lg px-4">
-                  <a href="#learn" className="text-decoration-none text-light">
-                    Learn more
-                  </a>
-                </button>
+                  Sign up
+                </Link>
+                <a
+                  href="#learn"
+                  className="text-decoration-none text-light btn btn-secondary btn-lg px-4"
+                >
+                  Learn more
+                </a>
               </div>
             </div>
           </div>
@@ -69,7 +65,9 @@ const Main = () => {
               </div>
               <h2 className="text-start py-3">Budget</h2>
               <p className="text-start">
-                Use our budget creation guide to help you get started. Set individual targets for several of the most common budget categories.
+                Use our budget creation guide to help you get started. Set
+                individual targets for several of the most common budget
+                categories.
               </p>
             </div>
           </div>

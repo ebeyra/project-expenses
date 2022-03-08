@@ -55,7 +55,7 @@ const Hub = () => {
                   data-bs-parent="#menu"
                 >
                   <li className="w-100">
-                    <Link to="/budget" className="nav-link px-0 text-end">
+                    <Link to="/budget/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
@@ -63,7 +63,10 @@ const Hub = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/transaction/create" className="nav-link px-0 text-end">
+                    <Link
+                      to="/transactions/create"
+                      className="nav-link px-0 text-end"
+                    >
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Transactions

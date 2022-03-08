@@ -16,6 +16,7 @@ const Login = () => {
       password,
     })
       .then((results) => {
+        console.log(results);
         localStorage.setItem("token", results.data);
         navigate("/hub");
       })

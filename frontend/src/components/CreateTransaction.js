@@ -27,7 +27,6 @@ const CreateTransaction = () => {
 
   const createTransaction = (e) => {
     e.preventDefault();
-    console.log(category);
     post("/expenses/new-transaction", {
       date,
       category,
@@ -46,6 +45,7 @@ const CreateTransaction = () => {
 
   const categoryEnum = [
     "Auto",
+    "Credit Card",
     "Entertainment",
     "Groceries",
     "Internet",
@@ -99,7 +99,7 @@ const CreateTransaction = () => {
                   data-bs-parent="#menu"
                 >
                   <li className="w-100">
-                    <Link to="/budget" className="nav-link px-0 text-end">
+                    <Link to="/budget/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
@@ -108,7 +108,7 @@ const CreateTransaction = () => {
                   </li>
                   <li>
                     <Link
-                      to="/transaction/create"
+                      to="/transactions/create"
                       className="nav-link px-0 text-end"
                     >
                       {" "}
@@ -182,6 +182,7 @@ const CreateTransaction = () => {
                   onChange={(e) => setCategory(e.target.value)}
                   required
                 >
+                  <option value="Other">Choose...</option>
                   {categoryList}
                 </select>
               </div>

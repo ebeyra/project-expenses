@@ -44,6 +44,18 @@ const Profile = () => {
       });
   };
 
+  const deleteAccount = (e) => {
+    e.preventDefault();
+    post(`/users/profile/delete`)
+      .then((results) => {
+        console.log("Account deleted: ", results);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error(err.message);
+      });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -53,11 +65,6 @@ const Profile = () => {
               className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
             >
-              {/* <li className="nav-item">
-                        <a href="#" className="nav-link align-middle px-0">
-                            <i className="fs-4 bi-house"></i> <span className="ms-1 d-none d-sm-inline text-white">Home</span>
-                        </a>
-                    </li> */}
               <li>
                 <Link to="/hub" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-speedometer2 text-white"></i>{" "}
@@ -83,7 +90,7 @@ const Profile = () => {
                   data-bs-parent="#menu"
                 >
                   <li className="w-100">
-                    <Link to="/budget" className="nav-link px-0 text-end">
+                    <Link to="/budget/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
@@ -91,7 +98,10 @@ const Profile = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/transactions" className="nav-link px-0 text-end">
+                    <Link
+                      to="/transactions/create"
+                      className="nav-link px-0 text-end"
+                    >
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Transactions
@@ -214,8 +224,17 @@ const Profile = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                    <button className="btn btn-success mt-3 mb-3" type="submit">
+                    <button
+                      className="btn btn-outline-success mt-3 mb-3 me-2"
+                      type="submit"
+                    >
                       Save changes
+                    </button>
+                    <button
+                      onClick={deleteAccount}
+                      className="btn btn-outline-danger mt-3 mb-3 ms-2 text-decoration-none"
+                    >
+                      Delete Account
                     </button>
                   </form>
                 </div>

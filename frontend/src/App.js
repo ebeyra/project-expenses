@@ -11,8 +11,9 @@ import NoAuth from "./components/NoAuth";
 import Hub from "./components/Hub";
 import Transactions from "./components/Transactions";
 import Budget from "./components/Budget";
-import EditTransaction from "./components/EditTransaction";
 import CreateTransaction from "./components/CreateTransaction";
+import EditTransaction from "./components/EditTransaction";
+import CreateBudget from "./components/CreateBudget";
 
 function App() {
   return (
@@ -26,9 +27,13 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/hub" element={<Hub />} />
         <Route path="/transactions" element={<Transactions />} />
+        <Route path="/transactions/create" element={<CreateTransaction />} />
+        <Route
+          path="/transactions/:transactionId"
+          element={<EditTransaction />}
+        />
         <Route path="/budget" element={<Budget />} />
-        <Route path="/transaction/:transId" element={<EditTransaction />} />
-        <Route path="/transaction/create" element={<CreateTransaction />} />
+        <Route path="/budget/create" element={<CreateBudget />} />
       </Routes>
       <Footer />
     </div>
