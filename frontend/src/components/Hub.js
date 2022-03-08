@@ -22,6 +22,7 @@ const Hub = () => {
   }, []);
 
   return (
+     // Sidebar //
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -107,6 +108,7 @@ const Hub = () => {
             </div>
           </div>
         </div>
+        {/* Page content start */}
         <div className="col py-3">
           <Budget />
           <Transactions />

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const budgetSchema = new Schema(
   {
-    monthlyIncome: {
+    income: {
       type: Number,
     },
     needs: {

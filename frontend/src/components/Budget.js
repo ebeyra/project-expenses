@@ -1,85 +1,44 @@
 import React from "react";
+import { post, get } from "../http/service";
+import { Link, useNavigate } from "react-router-dom";
 
 const Budget = () => {
+  const [userData, setUserData] = React.useState("");
+  const navigate = useNavigate();
 
-    const auto = "10%"
+  const auto = "10%";
 
-  return (
-    <div className="container col-4">
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: auto }}
-        >
-          Auto %
+  React.useEffect(() => {
+    get("/expenses")
+      .then((results) => {
+        setUserData(results.data);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        navigate("/noauth");
+      });
+  }, []);
+
+  const budgetItems = userData.foundBudget?.map((budgetDetails) => {
+    for (let i = 0; i < budgetDetails.needs.length; i++) {
+      return (
+        <div className="progress my-1">
+          <div
+            className="progress-bar progress-bar-striped text-dark"
+            role="progressbar"
+            style={{ backgroundColor: "#e0b646", width: auto }}
+            key={budgetDetails.needs[i]}
+          >
+            {budgetDetails.needs[i]}
+          </div>
         </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "25%" }}
-        >
-          Credit Card %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "50%" }}
-        >
-          Groceries %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "75%" }}
-        >
-          Internet %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "100%" }}
-        >
-          Mobile %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "100%" }}
-        >
-          Rent/Mortgage %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "100%" }}
-        >
-          Utilities %
-        </div>
-      </div>
-      <div className="progress my-1">
-        <div
-          className="progress-bar progress-bar-striped text-dark"
-          role="progressbar"
-          style={{ backgroundColor: "#e0b646", width: "100%" }}
-        >
-          Other %
-        </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  });
+
+  console.log(budgetItems);
+
+  return <div className="container col-4">{budgetItems}</div>;
 };
 
 export default Budget;

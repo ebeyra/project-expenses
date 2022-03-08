@@ -53,6 +53,7 @@ const CreateTransaction = () => {
   });
 
   return (
+    // Sidebar //
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -86,7 +87,10 @@ const CreateTransaction = () => {
                   data-bs-parent="#menu"
                 >
                   <li className="w-100">
-                    <Link to="/budget/create" className="nav-link px-0 text-end">
+                    <Link
+                      to="/budget/create"
+                      className="nav-link px-0 text-end"
+                    >
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
@@ -138,6 +142,7 @@ const CreateTransaction = () => {
             </div>
           </div>
         </div>
+        {/* Form container start */}
         <div className="container w-75 mt-4">
           <div className="row">
             <form
@@ -190,7 +195,6 @@ const CreateTransaction = () => {
                   />
                 </div>
               </div>
-
               <div className="col-lg-2">
                 <label className="" htmlFor="transaction-memo">
                   Memo
@@ -204,7 +208,6 @@ const CreateTransaction = () => {
                   onChange={(e) => setMemo(e.target.value)}
                 />
               </div>
-
               <div className="col-lg-2">
                 <label className="" htmlFor="product-search">
                   Product Search
@@ -218,7 +221,6 @@ const CreateTransaction = () => {
                   onChange={(e) => setProduct(e.target.value)}
                 />
               </div>
-
               <div className="col-lg-2" style={{ marginTop: "auto" }}>
                 <button type="submit" className="btn btn-success">
                   Submit

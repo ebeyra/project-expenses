@@ -57,6 +57,7 @@ const Profile = () => {
   };
 
   return (
+    // Sidebar //
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -142,6 +143,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        {/* Form container start */}
         <div className="col py-3">
           <div className="container px-4 mt-4" style={{ maxWidth: "800px" }}>
             <div className="row">

@@ -61,25 +61,26 @@ router.get("/new-budget", isAuthenticated, (req, res, next) => {
 
 router.post("/new-budget", isAuthenticated, (req, res, next) => {
   // No defaults set, but monthly income required
-  const { monthlyIncome } = req.body;
-  if (!monthlyIncome) {
+  const { income } = req.body;
+  if (!income) {
     return res
       .status(400)
       .json({ errorMessage: "Please enter an estimated monthly income" });
   }
   Budget.create({
-    monthlyIncome: req.body.monthlyIncome,
+    income: req.body.income,
     needs: {
       auto: req.body.auto,
       creditCard: req.body.creditCard,
+      entertainment: req.body.entertainment,
       groceries: req.body.groceries,
       internet: req.body.internet,
       mobile: req.body.mobile,
       rent: req.body.rent,
+      streaming: req.body.streaming,
       utilities: req.body.utilities,
       other: req.body.other,
     },
-    wants: req.body.wants,
     createdBy: req.payload._id,
   })
     .then((newBudget) => {
@@ -120,27 +121,23 @@ router.get("/budgets/:budgetId", isAuthenticated, (req, res, next) => {
 
 // Edit a transaction
 
-router.get(
-  "/transactions/edit",
-  isAuthenticated,
-  (req, res, next) => {
-    Transaction.findById(req.params.transactionId)
-      .then((foundTransaction) => {
-        res.json({
-          message: "Populated info to update",
-          transactionInfo: {
-            date: foundTransaction.date,
-            category: foundTransaction.category,
-            amount: foundTransaction.amount,
-            memo: foundTransaction.memo,
-          },
-        });
-      })
-      .catch((err) => {
-        res.status(500).json(err.message);
+router.get("/transactions/edit", isAuthenticated, (req, res, next) => {
+  Transaction.findById(req.params.transactionId)
+    .then((foundTransaction) => {
+      res.json({
+        message: "Populated info to update",
+        transactionInfo: {
+          date: foundTransaction.date,
+          category: foundTransaction.category,
+          amount: foundTransaction.amount,
+          memo: foundTransaction.memo,
+        },
       });
-  }
-);
+    })
+    .catch((err) => {
+      res.status(500).json(err.message);
+    });
+});
 
 router.post(
   "/transactions/:transactionId/edit",
@@ -170,18 +167,19 @@ router.get("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
       res.json({
         message: "Populated info to update",
         budgetInfo: {
-          monthlyIncome: foundBudget.monthlyIncome,
+          income: foundBudget.income,
           needs: {
             auto: foundBudget.needs.auto,
             creditCard: foundBudget.needs.creditCard,
+            entertainment: foundBudget.needs.entertainment,
             groceries: foundBudget.needs.groceries,
             internet: foundBudget.needs.internet,
             mobile: foundBudget.needs.mobile,
             rent: foundBudget.needs.rent,
+            streaming: foundBudget.needs.streaming,
             utilities: foundBudget.needs.utilities,
             other: foundBudget.needs.other,
           },
-          wants: foundBudget.wants,
         },
       });
     })
@@ -189,33 +187,6 @@ router.get("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
       res.status(500).json(err.message);
     });
 });
-
-// router.post("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
-//   Budget.findByIdAndUpdate(
-//     req.params.budgetId,
-//     {
-//       monthlyIncome: req.body.monthlyIncome,
-//       needs: {
-//         auto: req.body.auto,
-//         creditCard: req.body.creditCard,
-//         groceries: req.body.groceries,
-//         internet: req.body.internet,
-//         mobile: req.body.mobile,
-//         rent: req.body.rent,
-//         utilities: req.body.utilities,
-//         other: req.body.other,
-//       },
-//       wants: req.body.wants,
-//     },
-//     { new: true }
-//   )
-//     .then((updatedDetails) => {
-//       res.json({ message: "Budget details updated", updatedDetails });
-//     })
-//     .catch((err) => {
-//       res.status(500).json(err.message);
-//     });
-// });
 
 router.post("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
   Budget.findByIdAndUpdate(

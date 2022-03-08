@@ -1,11 +1,9 @@
 import React from "react";
 import { post, get } from "../http/service";
-import { Link, useNavigate } from "react-router-dom";
-import { logout } from "./utility/globalfunctions";
+import { Link } from "react-router-dom";
 
 const Transactions = () => {
   const [userData, setUserData] = React.useState("");
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     get("/expenses")

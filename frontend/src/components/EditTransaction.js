@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 import { post, get } from "../http/service";
-import { categoryEnum } from "./utility/globalfunctions";
 import { categoryList } from "./utility/globalfunctions";
 
 const EditTransaction = () => {
@@ -50,6 +49,7 @@ const EditTransaction = () => {
   };
 
   return (
+    // Sidebar //
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -138,6 +138,7 @@ const EditTransaction = () => {
             </div>
           </div>
         </div>
+        {/* Form container start */}
         <div className="col py-3">
           <div className="container w-75 mt-4">
             <div className="row">
