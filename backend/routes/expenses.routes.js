@@ -34,7 +34,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
             return item.category === "Mobile";
           });
           let rentTransactions = foundTransactions.filter((item) => {
-            return item.category === "Rent";
+            return item.category === "Mortgage/Rent";
           });
           let streamingTransactions = foundTransactions.filter((item) => {
             return item.category === "Streaming";
