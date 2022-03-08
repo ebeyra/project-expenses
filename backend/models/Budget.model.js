@@ -2,21 +2,17 @@ const { Schema, model } = require("mongoose");
 
 const budgetSchema = new Schema(
   {
-    income: {
-      type: Number,
-    },
-    needs: {
-      auto: Number,
-      creditCard: Number,
-      entertainment: Number,
-      groceries: Number,
-      internet: Number,
-      mobile: Number,
-      rent: Number,
-      streaming: Number,
-      utilities: Number,
-      other: Number,
-    },
+    income: Number,
+    auto: Number,
+    creditCard: Number,
+    entertainment: Number,
+    groceries: Number,
+    internet: Number,
+    mobile: Number,
+    rent: Number,
+    streaming: Number,
+    utilities: Number,
+    other: Number,
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",

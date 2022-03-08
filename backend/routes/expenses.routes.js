@@ -15,7 +15,51 @@ router.get("/", isAuthenticated, (req, res, next) => {
       Transaction.find({ createdBy: req.payload._id })
         .populate("createdBy")
         .then((foundTransactions) => {
-          res.json({ message: "Your items", foundTransactions, foundBudget });
+          let autoTransactions = foundTransactions.filter((item) => {
+            return item.category === "Auto";
+          });
+          let creditCardTransactions = foundTransactions.filter((item) => {
+            return item.category === "Credit Card";
+          });
+          let entertainmentTransactions = foundTransactions.filter((item) => {
+            return item.category === "Entertainment";
+          });
+          let groceriesTransactions = foundTransactions.filter((item) => {
+            return item.category === "Groceries";
+          });
+          let internetTransactions = foundTransactions.filter((item) => {
+            return item.category === "Internet";
+          });
+          let mobileTransactions = foundTransactions.filter((item) => {
+            return item.category === "Mobile";
+          });
+          let rentTransactions = foundTransactions.filter((item) => {
+            return item.category === "Rent";
+          });
+          let streamingTransactions = foundTransactions.filter((item) => {
+            return item.category === "Streaming";
+          });
+          let utilitiesTransactions = foundTransactions.filter((item) => {
+            return item.category === "Utilities";
+          });
+          let otherTransactions = foundTransactions.filter((item) => {
+            return item.category === "Other";
+          });
+          res.json({
+            message: "Your items",
+            foundTransactions,
+            foundBudget,
+            autoTransactions,
+            creditCardTransactions,
+            entertainmentTransactions,
+            groceriesTransactions,
+            internetTransactions,
+            mobileTransactions,
+            rentTransactions,
+            streamingTransactions,
+            utilitiesTransactions,
+            otherTransactions,
+          });
         });
     })
     .catch((err) => {
@@ -69,18 +113,16 @@ router.post("/new-budget", isAuthenticated, (req, res, next) => {
   }
   Budget.create({
     income: req.body.income,
-    needs: {
-      auto: req.body.auto,
-      creditCard: req.body.creditCard,
-      entertainment: req.body.entertainment,
-      groceries: req.body.groceries,
-      internet: req.body.internet,
-      mobile: req.body.mobile,
-      rent: req.body.rent,
-      streaming: req.body.streaming,
-      utilities: req.body.utilities,
-      other: req.body.other,
-    },
+    auto: req.body.auto,
+    creditCard: req.body.creditCard,
+    entertainment: req.body.entertainment,
+    groceries: req.body.groceries,
+    internet: req.body.internet,
+    mobile: req.body.mobile,
+    rent: req.body.rent,
+    streaming: req.body.streaming,
+    utilities: req.body.utilities,
+    other: req.body.other,
     createdBy: req.payload._id,
   })
     .then((newBudget) => {
@@ -168,18 +210,16 @@ router.get("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
         message: "Populated info to update",
         budgetInfo: {
           income: foundBudget.income,
-          needs: {
-            auto: foundBudget.needs.auto,
-            creditCard: foundBudget.needs.creditCard,
-            entertainment: foundBudget.needs.entertainment,
-            groceries: foundBudget.needs.groceries,
-            internet: foundBudget.needs.internet,
-            mobile: foundBudget.needs.mobile,
-            rent: foundBudget.needs.rent,
-            streaming: foundBudget.needs.streaming,
-            utilities: foundBudget.needs.utilities,
-            other: foundBudget.needs.other,
-          },
+          auto: foundBudget.auto,
+          creditCard: foundBudget.creditCard,
+          entertainment: foundBudget.entertainment,
+          groceries: foundBudget.groceries,
+          internet: foundBudget.internet,
+          mobile: foundBudget.mobile,
+          rent: foundBudget.rent,
+          streaming: foundBudget.streaming,
+          utilities: foundBudget.utilities,
+          other: foundBudget.other,
         },
       });
     })

@@ -4,12 +4,12 @@ const transactionSchema = new Schema(
   {
     date: {
       type: String,
-      default: Date.now,
     },
     category: {
       type: String,
       enum: [
         "Auto",
+        "Credit Card",
         "Entertainment",
         "Groceries",
         "Internet",
