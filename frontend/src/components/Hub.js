@@ -22,7 +22,7 @@ const Hub = () => {
   }, []);
 
   return (
-     // Sidebar //
+    // Sidebar //
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -55,14 +55,17 @@ const Hub = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  <li className="w-100">
-                    <Link to="/budget/create" className="nav-link px-0 text-end">
+                  {/* <li className="w-100">
+                    <Link
+                      to="/budget/create"
+                      className="nav-link px-0 text-end"
+                    >
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
                       </span>{" "}
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/transactions/create"
@@ -110,8 +113,15 @@ const Hub = () => {
         </div>
         {/* Page content start */}
         <div className="col py-3">
-          <Budget />
-          <Transactions />
+          <div className=" d-flex flex-row">
+            <div className="col-md-6">
+              <Budget />
+            </div>
+            <div className="col-md-6">API Space</div>
+          </div>
+          <div>
+            <Transactions />
+          </div>
         </div>
       </div>
     </div>

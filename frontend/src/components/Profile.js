@@ -90,14 +90,14 @@ const Profile = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  <li className="w-100">
+                  {/* <li className="w-100">
                     <Link to="/budget/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
                       </span>{" "}
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/transactions/create"

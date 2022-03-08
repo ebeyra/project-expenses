@@ -16,12 +16,10 @@ const EditTransaction = () => {
   const navigate = useNavigate();
   const { transactionId } = useParams();
 
-  console.log();
-
   React.useEffect(() => {
     get("/users/profile")
       .then((results) => {
-        setUserInfo(results.data.foundUser);
+        setUserInfo(results?.data?.foundUser);
       })
       .catch((err) => {
         console.error(err.message);
@@ -82,7 +80,7 @@ const EditTransaction = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  <li className="w-100">
+                  {/* <li className="w-100">
                     <Link
                       to="/budget/create"
                       className="nav-link px-0 text-end"
@@ -92,7 +90,7 @@ const EditTransaction = () => {
                         Budget
                       </span>{" "}
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/transactions/create"

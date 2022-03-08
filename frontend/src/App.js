@@ -14,6 +14,7 @@ import Budget from "./components/Budget";
 import CreateTransaction from "./components/CreateTransaction";
 import EditTransaction from "./components/EditTransaction";
 import CreateBudget from "./components/CreateBudget";
+import EditBudget from "./components/EditBudget";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="/budget" element={<Budget />} />
         <Route path="/budget/create" element={<CreateBudget />} />
+        <Route path="/budget/:budgetId" element={<EditBudget />} />
       </Routes>
       <Footer />
     </div>

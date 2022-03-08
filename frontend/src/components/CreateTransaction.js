@@ -1,7 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { post, get } from "../http/service";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 import { categoryEnum } from "./utility/globalfunctions";
 
@@ -18,7 +17,7 @@ const CreateTransaction = () => {
   React.useEffect(() => {
     get("/users/profile")
       .then((results) => {
-        setUserInfo(results.data.foundUser);
+        setUserInfo(results?.data?.foundUser);
       })
       .catch((err) => {
         console.error(err.message);
@@ -86,7 +85,7 @@ const CreateTransaction = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  <li className="w-100">
+                  {/* <li className="w-100">
                     <Link
                       to="/budget/create"
                       className="nav-link px-0 text-end"
@@ -96,7 +95,7 @@ const CreateTransaction = () => {
                         Budget
                       </span>{" "}
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       to="/transactions/create"

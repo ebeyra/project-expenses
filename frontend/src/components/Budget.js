@@ -140,27 +140,10 @@ const Budget = () => {
   return (
     // Page output
     <div className="container d-flex flex-row">
-      <div>
-        <div className="text-start">
-          Income: <span>${userBudget?.income}</span>
-        </div>
-        <div className="text-start">
-          Spending Budget:{" "}
-          <span
-            className={
-              totalSpendingBudget > userBudget?.income
-                ? "text-danger"
-                : "text-dark"
-            }
-          >
-            ${totalSpendingBudget}
-          </span>
-        </div>
-      </div>
       <div className="container col-8">
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{ backgroundColor: "#e0b646", width: autoProgress + "%" }}
             value="auto"
@@ -179,7 +162,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -201,7 +184,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -223,7 +206,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -245,7 +228,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -267,7 +250,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{ backgroundColor: "#e0b646", width: mobileProgress + "%" }}
             value="mobile"
@@ -286,7 +269,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{ backgroundColor: "#e0b646", width: rentProgress + "%" }}
             value="rent"
@@ -299,13 +282,13 @@ const Budget = () => {
                   : "text-dark"
               }
             >
-              Rent/Mortgage {rentProgress + "%"}
+              Mortgage/Rent {rentProgress + "%"}
             </span>
           </div>
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -327,7 +310,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{
               backgroundColor: "#e0b646",
@@ -349,7 +332,7 @@ const Budget = () => {
         </div>
         <div className="progress my-1" style={{ height: "30px" }}>
           <div
-            className="progress-bar progress-bar-striped text-dark"
+            className="progress-bar progress-bar-striped progress-bar-animated text-dark"
             role="progressbar"
             style={{ backgroundColor: "#e0b646", width: otherProgress + "%" }}
             value="other"
@@ -365,6 +348,37 @@ const Budget = () => {
               Other {otherProgress + "%"}
             </span>
           </div>
+        </div>
+      </div>
+      {/* Side of budget */}
+      <div>
+        <div className="text-start">
+          Income: <span>${userBudget?.income}</span>
+        </div>
+        <div className="text-start">
+          Spending Budget:{" "}
+          <span
+            className={
+              totalSpendingBudget > userBudget?.income
+                ? "text-danger"
+                : "text-dark"
+            }
+          >
+            ${totalSpendingBudget}
+          </span>
+        </div>
+        <div>
+          <div className="text-start">Deposits: $</div>
+          <div className="text-start">Total Spent: $</div>
+        </div>
+        <div>
+        <Link
+            to={`/budget/${userBudget?._id}`}
+            className="btn btn-outline-success me-2 text-decoration-none"
+            style={{ fontSize: "13px" }}
+          >
+            Edit Budget
+          </Link>
         </div>
       </div>
     </div>

@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { post, get } from "../http/service";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
+import { post, get } from "../http/service";
 
-const CreateBudget = () => {
+const EditBudget = () => {
+  const [userBudget, setUserBudget] = React.useState("");
   const [userInfo, setUserInfo] = React.useState("");
   const [income, setIncome] = React.useState("");
   const [auto, setAuto] = React.useState("");
@@ -19,6 +20,19 @@ const CreateBudget = () => {
   const [other, setOther] = React.useState("");
 
   const navigate = useNavigate();
+  const { budgetId } = useParams();
+
+  React.useEffect(() => {
+    get(`/expenses/budgets/${budgetId}`)
+      .then((results) => {
+        console.log(results);
+        setUserBudget(results?.data?.foundBudget);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        navigate("/noauth");
+      });
+  }, []);
 
   React.useEffect(() => {
     get("/users/profile")
@@ -31,9 +45,10 @@ const CreateBudget = () => {
       });
   }, []);
 
-  const createBudget = (e) => {
+  const editBudget = (e) => {
     e.preventDefault();
-    post("/expenses/new-budget", {
+    // let filteredObject = Object.fromEntries(Object.entries(obj).filter(([key, value]) => value));
+    post(`/expenses/budgets/${budgetId}/edit`, {
       income,
       auto,
       creditCard,
@@ -47,8 +62,8 @@ const CreateBudget = () => {
       other,
     })
       .then((results) => {
-        console.log("Budget created: ", results);
-        navigate("/transactions/create");
+        console.log("Budget updated: ", results);
+        navigate("/hub");
       })
       .catch((err) => {
         console.error(err.message);
@@ -56,7 +71,7 @@ const CreateBudget = () => {
   };
 
   return (
-    // Sidebar //
+    // Sidebar
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-auto px-sm-2 px-0 bg-success full-screen">
@@ -153,12 +168,12 @@ const CreateBudget = () => {
           >
             <div className="card">
               <div className="card-header">
-                <h2>Getting Started With a Budget</h2>
+                <h2>Updating Your Budget</h2>
               </div>
               <div className="card-body">
                 <p>
-                  Use our template guide below to start tracking your spending
-                  and stay in control.
+                  New changes to keep track of? Update your budget below to stay
+                  current.
                 </p>
               </div>
             </div>
@@ -171,7 +186,7 @@ const CreateBudget = () => {
             <div className="row">
               <form
                 className="text-start my-5 d-flex align-items-center justify-content-evenly"
-                onSubmit={createBudget}
+                onSubmit={editBudget}
               >
                 <div className="">
                   <div className="form-group col-sm-12 my-2">
@@ -180,7 +195,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="monthly-income"
-                      placeholder="Income"
+                      placeholder={userBudget?.income}
                       value={income}
                       onChange={(e) => setIncome(e.target.value)}
                       required
@@ -192,7 +207,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="auto"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.auto}
                       value={auto}
                       onChange={(e) => setAuto(e.target.value)}
                     />
@@ -203,7 +218,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="credit-card"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.creditCard}
                       value={creditCard}
                       onChange={(e) => setCreditCard(e.target.value)}
                     />
@@ -214,7 +229,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="entertainment"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.entertainment}
                       value={entertainment}
                       onChange={(e) => setEntertainment(e.target.value)}
                     />
@@ -225,7 +240,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="groceries"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.groceries}
                       value={groceries}
                       onChange={(e) => setGroceries(e.target.value)}
                     />
@@ -236,7 +251,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="internet"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.internet}
                       value={internet}
                       onChange={(e) => setInternet(e.target.value)}
                     />
@@ -249,7 +264,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="mobile"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.mobile}
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
                     />
@@ -260,7 +275,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="rent"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.rent}
                       value={rent}
                       onChange={(e) => setRent(e.target.value)}
                     />
@@ -271,7 +286,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="streaming"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.streaming}
                       value={streaming}
                       onChange={(e) => setStreaming(e.target.value)}
                     />
@@ -282,7 +297,7 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="utilities"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.utilities}
                       value={utilities}
                       onChange={(e) => setUtilities(e.target.value)}
                     />
@@ -293,13 +308,13 @@ const CreateBudget = () => {
                       type="number"
                       className="form-control"
                       id="other"
-                      placeholder="Enter an estimate"
+                      placeholder={userBudget?.other}
                       value={other}
                       onChange={(e) => setOther(e.target.value)}
                     />
                   </div>
                   <button type="submit" className="btn btn-success my-3">
-                    Create Budget
+                    Save Changes
                   </button>
                 </div>
               </form>
@@ -311,4 +326,4 @@ const CreateBudget = () => {
   );
 };
 
-export default CreateBudget;
+export default EditBudget;
