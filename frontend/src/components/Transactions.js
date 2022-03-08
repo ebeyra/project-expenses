@@ -5,7 +5,7 @@ import { categoryEnum } from "./utility/globalfunctions";
 
 const Transactions = () => {
   const [userData, setUserData] = React.useState("");
-  const [sortedTransactions, setSortedTransactions] = React.useState("");
+  const [sortedTransactions, setSortedTransactions] = React.useState();
   const [date, setDate] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [amount, setAmount] = React.useState("");
@@ -16,7 +16,7 @@ const Transactions = () => {
   React.useEffect(() => {
     get("/expenses")
       .then((results) => {
-        setUserData(results?.data)
+        setUserData(results?.data);
         let sortedList = results?.data?.foundTransactions?.sort(
           (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
         );
@@ -57,7 +57,7 @@ const Transactions = () => {
     );
   });
 
-  console.log(userData)
+  console.log(userData);
 
   const transactionList = sortedTransactions?.map((transactions) => {
     const deleteTransaction = (e) => {
