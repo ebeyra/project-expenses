@@ -94,9 +94,6 @@ const Login = () => {
           </button>
           <p className="mt-5 mb-3 text-muted">&copy; 2022</p>
         </form>
-        <button onClick={checkIfLoggedIn}>See if you are logged in</button>
-        <button onClick={checkToken}>check if token is stored</button>
-        <button onClick={logout}>Logout</button>
       </main>
     </div>
   );

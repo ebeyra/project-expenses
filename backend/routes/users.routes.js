@@ -75,15 +75,18 @@ router.get("/profile/edit", isAuthenticated, (req, res, next) => {
 // });
 
 router.post("/profile/edit", isAuthenticated, (req, res, next) => {
-  if (req.body.password) {
+  let filteredObject = Object.fromEntries(
+    Object.entries(req.body).filter(([key, value]) => value)
+  );
+  if (filteredObject.password) {
     const salt = bcrypt.genSaltSync(saltRounds);
-    const hashedPass = bcrypt.hashSync(req.body.password, salt);
-    req.body.password = hashedPass;
+    const hashedPass = bcrypt.hashSync(filteredObject.password, salt);
+    filteredObject.password = hashedPass;
   }
   User.findByIdAndUpdate(
     req.payload._id,
     {
-      ...req.body,
+      ...filteredObject,
     },
     { new: true }
   )

@@ -189,10 +189,13 @@ router.post(
   "/transactions/:transactionId/edit",
   isAuthenticated,
   (req, res, next) => {
+    let filteredObject = Object.fromEntries(
+      Object.entries(req.body).filter(([key, value]) => value)
+    );
     Transaction.findByIdAndUpdate(
       req.params.transactionId,
       {
-        ...req.body,
+        ...filteredObject,
       },
       { new: true }
     )
@@ -233,10 +236,13 @@ router.get("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
 });
 
 router.post("/budgets/:budgetId/edit", isAuthenticated, (req, res, next) => {
+  let filteredObject = Object.fromEntries(
+    Object.entries(req.body).filter(([key, value]) => value)
+  );
   Budget.findByIdAndUpdate(
     req.params.budgetId,
     {
-      ...req.body,
+      ...filteredObject,
     },
     { new: true }
   )

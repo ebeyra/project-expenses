@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 
 const Profile = () => {
-  const [userInfo, setUserInfo] = React.useState("");
+  const [userInfo, setUserInfo] = React.useState({});
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
@@ -17,7 +17,7 @@ const Profile = () => {
   React.useEffect(() => {
     get("/users/profile")
       .then((results) => {
-        setUserInfo(results.data.foundUser);
+        setUserInfo(results?.data?.foundUser);
       })
       .catch((err) => {
         console.error(err.message);
@@ -74,43 +74,6 @@ const Profile = () => {
                   </span>{" "}
                 </Link>
               </li>
-              {/* <li>
-                <a
-                  href="#submenu2"
-                  data-bs-toggle="collapse"
-                  className="nav-link px-0 align-middle "
-                >
-                  <i className="fs-4 bi-journal-text text-white"></i>{" "}
-                  <span className="ms-1 d-none d-sm-inline text-white">
-                    Expenses
-                  </span>
-                </a>
-                <ul
-                  className="collapse nav flex-column ms-1"
-                  id="submenu2"
-                  data-bs-parent="#menu"
-                >
-                  <li className="w-100">
-                    <Link to="/budget/create" className="nav-link px-0 text-end">
-                      {" "}
-                      <span className="d-none d-sm-inline text-white">
-                        Budget
-                      </span>{" "}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/transactions/create"
-                      className="nav-link px-0 text-end"
-                    >
-                      {" "}
-                      <span className="d-none d-sm-inline text-white">
-                        Transactions
-                      </span>{" "}
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
               <li>
                 <Link to="/profile" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}

@@ -88,46 +88,6 @@ const EditBudget = () => {
                   </span>{" "}
                 </Link>
               </li>
-              {/* <li>
-                <a
-                  href="#submenu2"
-                  data-bs-toggle="collapse"
-                  className="nav-link px-0 align-middle "
-                >
-                  <i className="fs-4 bi-journal-text text-white"></i>{" "}
-                  <span className="ms-1 d-none d-sm-inline text-white">
-                    Expenses
-                  </span>
-                </a>
-                <ul
-                  className="collapse nav flex-column ms-1"
-                  id="submenu2"
-                  data-bs-parent="#menu"
-                >
-                  <li className="w-100">
-                    <Link
-                      to="/budget/create"
-                      className="nav-link px-0 text-end"
-                    >
-                      {" "}
-                      <span className="d-none d-sm-inline text-white">
-                        Budget
-                      </span>{" "}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/transactions/create"
-                      className="nav-link px-0 text-end"
-                    >
-                      {" "}
-                      <span className="d-none d-sm-inline text-white">
-                        Transactions
-                      </span>{" "}
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
               <li>
                 <Link to="/profile" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}
@@ -198,7 +158,6 @@ const EditBudget = () => {
                       placeholder={userBudget?.income}
                       value={income}
                       onChange={(e) => setIncome(e.target.value)}
-                      required
                     />
                   </div>
                   <div className="form-group col-sm-12 my-2">
