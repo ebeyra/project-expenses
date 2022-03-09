@@ -88,7 +88,7 @@ const EditBudget = () => {
                   </span>{" "}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href="#submenu2"
                   data-bs-toggle="collapse"
@@ -104,7 +104,7 @@ const EditBudget = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  {/* <li className="w-100">
+                  <li className="w-100">
                     <Link
                       to="/budget/create"
                       className="nav-link px-0 text-end"
@@ -114,7 +114,7 @@ const EditBudget = () => {
                         Budget
                       </span>{" "}
                     </Link>
-                  </li> */}
+                  </li>
                   <li>
                     <Link
                       to="/transactions/create"
@@ -127,7 +127,7 @@ const EditBudget = () => {
                     </Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li>
                 <Link to="/profile" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}

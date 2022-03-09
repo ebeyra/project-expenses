@@ -1,6 +1,6 @@
 import React from "react";
 import fakelogo from "../assets/images/fakelogo.svg";
-import { get, post } from "../http/service";
+import { post } from "../http/service";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {

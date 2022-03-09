@@ -1,5 +1,5 @@
 import React from "react";
-import { post, get } from "../http/service";
+import { get } from "../http/service";
 import { Link, useNavigate } from "react-router-dom";
 
 const Budget = () => {

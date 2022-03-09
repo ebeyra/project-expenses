@@ -74,7 +74,7 @@ const Profile = () => {
                   </span>{" "}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a
                   href="#submenu2"
                   data-bs-toggle="collapse"
@@ -90,14 +90,14 @@ const Profile = () => {
                   id="submenu2"
                   data-bs-parent="#menu"
                 >
-                  {/* <li className="w-100">
+                  <li className="w-100">
                     <Link to="/budget/create" className="nav-link px-0 text-end">
                       {" "}
                       <span className="d-none d-sm-inline text-white">
                         Budget
                       </span>{" "}
                     </Link>
-                  </li> */}
+                  </li>
                   <li>
                     <Link
                       to="/transactions/create"
@@ -110,7 +110,7 @@ const Profile = () => {
                     </Link>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li>
                 <Link to="/profile" className="nav-link px-0 align-middle">
                   <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}

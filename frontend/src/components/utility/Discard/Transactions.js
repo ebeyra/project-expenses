@@ -5,7 +5,7 @@ import { categoryEnum } from "./utility/globalfunctions";
 
 const Transactions = () => {
   const [userData, setUserData] = React.useState("");
-  const [sortedTransactions, setSortedTransactions] = React.useState();
+  const [sortedTransactions, setSortedTransactions] = React.useState([]);
   const [date, setDate] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [amount, setAmount] = React.useState("");
@@ -17,7 +17,8 @@ const Transactions = () => {
     get("/expenses")
       .then((results) => {
         setUserData(results?.data);
-        let sortedList = results?.data?.foundTransactions?.sort(
+        let sortArray = [...results?.data?.foundTransactions];
+        let sortedList = sortArray.sort(
           (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
         );
         setSortedTransactions(sortedList);
@@ -27,7 +28,8 @@ const Transactions = () => {
       });
   }, []);
 
-  const createTransaction = () => {
+  const createTransaction = (e) => {
+    e.preventDefault();
     post("/expenses/new-transaction", {
       date,
       category,
@@ -37,7 +39,8 @@ const Transactions = () => {
       .then((results) => {
         console.log("Transaction created: ", results);
         get("/expenses").then((results) => {
-          let sortedList = results?.data?.foundTransactions?.sort(
+          let sortArray = [...results?.data?.foundTransactions];
+          let sortedList = sortArray.sort(
             (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
           );
           setSortedTransactions(sortedList);
@@ -57,25 +60,29 @@ const Transactions = () => {
     );
   });
 
-  console.log(userData);
-
   const transactionList = sortedTransactions?.map((transactions) => {
     const deleteTransaction = (e) => {
       e.preventDefault();
-      let filteredTransactions = userData?.foundTransactions?.filter((item) => {
-        return item._id !== transactions._id;
-      });
-      post(`/expenses/transactions/${transactions._id}/delete`)
-        .then((results) => {
+      post(`/expenses/transactions/${transactions._id}/delete`).then(
+        (results) => {
           console.log(
             "Transaction deleted: ",
             results.data.transactionToRemove
           );
-          setUserData({ ...userData, foundTransactions: filteredTransactions });
-        })
-        .catch((err) => {
-          console.error(err.message);
-        });
+          get("/expenses")
+            .then((results) => {
+              let sortArray = [...results?.data?.foundTransactions];
+              let sortedList = sortArray.sort(
+                (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
+              );
+              setSortedTransactions(sortedList);
+              navigate("/hub");
+            })
+            .catch((err) => {
+              console.error(err.message);
+            });
+        }
+      );
     };
 
     return (
@@ -162,7 +169,7 @@ const Transactions = () => {
                 onChange={(e) => setMemo(e.target.value)}
               />
             </div>
-            <div className="col-lg-2" style={{ marginTop: "auto" }}>
+            <div className="col-xl-2" style={{ marginTop: "auto" }}>
               <button type="submit" className="btn btn-success">
                 Add Transaction
               </button>
