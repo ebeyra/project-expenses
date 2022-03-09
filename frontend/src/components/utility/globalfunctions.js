@@ -14,7 +14,6 @@ export const categoryEnum = [
   "Mobile",
   "Mortgage/Rent",
   "Refund",
-  "Salary",
   "Streaming",
   "Utilities",
   "Other",

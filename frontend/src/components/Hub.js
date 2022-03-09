@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 import { get, post } from "../http/service";
 import { categoryEnum } from "./utility/globalfunctions";
-import SearchTransactions from "./SearchTransactions";
 
 const Hub = () => {
   // Hooks for database info: user, transaction, budget
@@ -44,6 +43,7 @@ const Hub = () => {
           (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
         );
         setSortedTransactions(sortedList);
+        setSearchResults(sortedList);
       })
       .catch((err) => {
         console.error(err.message);
@@ -69,6 +69,7 @@ const Hub = () => {
             (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
           );
           setSortedTransactions(sortedList);
+          setSearchResults(sortedList);
           navigate("/hub");
         });
       })
@@ -94,12 +95,13 @@ const Hub = () => {
     let searchResults = transactionArray.filter((transaction) => {
       return transaction.memo.toLowerCase().includes(input.toLowerCase());
     });
-    setSortedTransactions(searchResults);
+    // setSortedTransactions(searchResults);
+    setSearchResults(searchResults);
   };
 
   // Sort transactions by date
 
-  const transactionList = sortedTransactions?.map((transactions) => {
+  const transactionList = searchResults?.map((transactions) => {
     const deleteTransaction = (e) => {
       e.preventDefault();
       post(`/expenses/transactions/${transactions._id}/delete`).then(
@@ -118,7 +120,7 @@ const Hub = () => {
                 (a, b) => b.date.substring(8, 10) - a.date.substring(8, 10)
               );
               setSortedTransactions(sortedList);
-              navigate("/hub");
+              setSearchResults(sortedList);
             })
             .catch((err) => {
               console.error(err.message);
@@ -177,48 +179,69 @@ const Hub = () => {
     return sum;
   };
 
-  let autoProgress = Math.floor(
-    (calculateSpend(data?.autoTransactions) / userBudget?.auto) * 100
+  let autoSpend = Math.floor(calculateSpend(data?.autoTransactions));
+  let creditCardSpend = Math.floor(
+    calculateSpend(data?.creditCardTransactions)
   );
+  let entertainmentSpend = Math.floor(
+    calculateSpend(data?.entertainmentTransactions)
+  );
+  let groceriesSpend = Math.floor(calculateSpend(data?.groceriesTransactions));
+  let internetSpend = Math.floor(calculateSpend(data?.internetTransactions));
+  let mobileSpend = Math.floor(calculateSpend(data?.mobileTransactions));
+  let rentSpend = Math.floor(calculateSpend(data?.rentTransactions));
+  let streamingSpend = Math.floor(calculateSpend(data?.streamingTransactions));
+  let utilitiesSpend = Math.floor(calculateSpend(data?.utilitiesTransactions));
+  let otherSpend = Math.floor(calculateSpend(data?.otherTransactions));
+  let refunds = Math.floor(calculateSpend(data?.refundTransactions));
 
+  let totalSpend =
+    autoSpend +
+    creditCardSpend +
+    entertainmentSpend +
+    groceriesSpend +
+    internetSpend +
+    mobileSpend +
+    rentSpend +
+    streamingSpend +
+    utilitiesSpend +
+    otherSpend -
+    refunds;
+
+  // Progress bar math
+
+  let autoProgress = Math.floor((autoSpend / userBudget?.auto) * 100);
   let creditCardProgress = Math.floor(
-    (calculateSpend(data?.creditCardTransactions) / userBudget?.creditCard) *
-      100
+    (creditCardSpend / userBudget?.creditCard) * 100
   );
-
   let entertainmentProgress = Math.floor(
-    (calculateSpend(data?.entertainmentTransactions) /
-      userBudget?.entertainment) *
-      100
+    (entertainmentSpend / userBudget?.entertainment) * 100
   );
-
   let groceriesProgress = Math.floor(
-    (calculateSpend(data?.groceriesTransactions) / userBudget?.groceries) * 100
+    (groceriesSpend / userBudget?.groceries) * 100
   );
-
   let internetProgress = Math.floor(
-    (calculateSpend(data?.internetTransactions) / userBudget?.internet) * 100
+    (internetSpend / userBudget?.internet) * 100
   );
-
-  let mobileProgress = Math.floor(
-    (calculateSpend(data?.mobileTransactions) / userBudget?.mobile) * 100
-  );
-
-  let rentProgress = Math.floor(
-    (calculateSpend(data?.rentTransactions) / userBudget?.rent) * 100
-  );
-
+  let mobileProgress = Math.floor((mobileSpend / userBudget?.mobile) * 100);
+  let rentProgress = Math.floor((rentSpend / userBudget?.rent) * 100);
   let streamingProgress = Math.floor(
-    (calculateSpend(data?.streamingTransactions) / userBudget?.streaming) * 100
+    (streamingSpend / userBudget?.streaming) * 100
   );
-
   let utilitiesProgress = Math.floor(
-    (calculateSpend(data?.utilitiesTransactions) / userBudget?.utilities) * 100
+    (utilitiesSpend / userBudget?.utilities) * 100
   );
+  let otherProgress = Math.floor((otherSpend / userBudget?.other) * 100);
 
-  let otherProgress = Math.floor(
-    (calculateSpend(data?.otherTransactions) / userBudget?.other) * 100
-  );
+  // API data
+
+  // Hard coded data for browser testing
+  // https://image-charts.com/chart?cht=bvs&chs=700x500&chd=t:50,100,300,80,20,100,90,200,120&chds=a&chf=b0,lg,0,198754,1&chtt=Category%20Spend&chxl=1:|Auto|Credit|Entertainment|Groceries|Internet|Mobile|Streaming|Utilities|Other&chan&chxr=0,0,800&chxt=y,x
+
+  const chartData = {
+    method: "GET",
+    url: `https://image-charts.com/chart?cht=bvs&chs=600x350&chd=t:${autoSpend},${creditCardSpend},${entertainmentSpend},${groceriesSpend},${internetSpend},${mobileSpend},${streamingSpend},${utilitiesSpend},${otherSpend}&chds=a&chf=b0,lg,0,198754,1&chtt=Category%20Spend&chxl=1:|Auto|Credit|Entertain|Groceries|Internet|Mobile|Streaming|Utilities|Other&chan&chxr=0,0,800&chxt=y,x`,
+  };
 
   return (
     //         //
@@ -558,7 +581,7 @@ const Hub = () => {
                 <div className="d-flex flex-column justify-content-center">
                   <div className="d-flex justify-content-evenly">
                     <div
-                      className="card border-primary mb-3"
+                      className="card border-primary mb-3 ms-5"
                       style={{ width: "6rem", height: "6rem" }}
                     >
                       <div className="card-header">Income</div>
@@ -569,7 +592,7 @@ const Hub = () => {
                       </div>
                     </div>
                     <div
-                      className="card border-success mb-3 ms-3"
+                      className="card border-warning mb-3 ms-3"
                       style={{ width: "6rem", height: "6rem" }}
                     >
                       <div className="card-header">Budget</div>
@@ -590,7 +613,7 @@ const Hub = () => {
                   </div>
                   <div className="d-flex">
                     <div
-                      className="card border-success mb-3"
+                      className="card border-success mb-3 ms-5"
                       style={{ width: "6rem", height: "6rem" }}
                     >
                       <div className="card-header">Deposit</div>
@@ -598,18 +621,16 @@ const Hub = () => {
                         <h6 className="card-title">
                           <span
                             className={
-                              totalSpendingBudget > userBudget?.income
-                                ? "text-danger"
-                                : "text-dark"
+                              refunds > 0 ? "text-primary" : "text-dark"
                             }
                           >
-                            ${"0"}
+                            ${refunds}
                           </span>
                         </h6>
                       </div>
                     </div>
                     <div
-                      className="card border-success mb-3 ms-3"
+                      className="card border-danger mb-3 ms-3"
                       style={{ width: "6rem", height: "6rem" }}
                     >
                       <div className="card-header">Spent</div>
@@ -617,12 +638,12 @@ const Hub = () => {
                         <h6 className="card-title">
                           <span
                             className={
-                              totalSpendingBudget > userBudget?.income
+                              totalSpend > totalSpendingBudget
                                 ? "text-danger"
                                 : "text-dark"
                             }
                           >
-                            ${"0"}
+                            ${totalSpend}
                           </span>
                         </h6>
                       </div>
@@ -631,7 +652,7 @@ const Hub = () => {
                   <div>
                     <Link
                       to={`/budget/${userBudget?._id}`}
-                      className="btn btn-outline-success mx-auto text-decoration-none"
+                      className="btn btn-outline-success mx-auto text-decoration-none ms-5"
                       style={{ fontSize: "13px" }}
                     >
                       Edit Budget
@@ -640,7 +661,19 @@ const Hub = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-6">API Space</div>
+            {/*                         */}
+            {/*                         */}
+            {/*        API SECTION      */}
+            {/*                         */}
+            {/*                         */}
+            <div className="col-sm-6">
+              <img
+                src={chartData?.url}
+                alt="chart data"
+                className="col-10 mt-2"
+                style={{ height: "330px", width: "650px" }}
+              />
+            </div>
           </div>
           <div>
             {/*                         */}
@@ -649,7 +682,7 @@ const Hub = () => {
             {/*                         */}
             {/*                         */}
             <div>
-              <div className="container">
+              <div className="container mt-3">
                 <div className="row">
                   <form
                     className="row gx-3 mt-4 align-items-center justify-content-start text-start col-12"

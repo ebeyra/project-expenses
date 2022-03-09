@@ -45,6 +45,9 @@ router.get("/", isAuthenticated, (req, res, next) => {
           let otherTransactions = foundTransactions.filter((item) => {
             return item.category === "Other";
           });
+          let refundTransactions = foundTransactions.filter((item) => {
+            return item.category === "Refund";
+          });
           res.json({
             message: "Your items",
             foundTransactions,
@@ -59,6 +62,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
             streamingTransactions,
             utilitiesTransactions,
             otherTransactions,
+            refundTransactions,
           });
         });
     })

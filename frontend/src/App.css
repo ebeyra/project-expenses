@@ -10,5 +10,5 @@
 }
 
 .full-screen > * {
-  min-height: calc(100vh - 170px);
+  min-height: calc(100vh - 163px);
 }

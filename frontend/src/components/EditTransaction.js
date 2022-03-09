@@ -11,7 +11,7 @@ const EditTransaction = () => {
   const [category, setCategory] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const [memo, setMemo] = React.useState("");
-  const [product, setProduct] = React.useState("");
+
 
   const navigate = useNavigate();
   const { transactionId } = useParams();
@@ -35,7 +35,6 @@ const EditTransaction = () => {
       category,
       amount,
       memo,
-      product,
     })
       .then((results) => {
         console.log("Transaction updated: ", results);
@@ -199,20 +198,6 @@ const EditTransaction = () => {
                     placeholder="Note"
                     value={memo}
                     onChange={(e) => setMemo(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-lg-2">
-                  <label className="" htmlFor="product-search">
-                    Product Search
-                  </label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="product-search"
-                    placeholder="Optional"
-                    value={product}
-                    onChange={(e) => setProduct(e.target.value)}
                   />
                 </div>
 
