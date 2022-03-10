@@ -167,19 +167,6 @@ const CreateTransaction = () => {
                   onChange={(e) => setMemo(e.target.value)}
                 />
               </div>
-              <div className="col-lg-2">
-                <label className="" htmlFor="product-search">
-                  Product Search
-                </label>
-                <input
-                  className="form-control"
-                  type="text"
-                  id="product-search"
-                  placeholder="Optional"
-                  value={product}
-                  onChange={(e) => setProduct(e.target.value)}
-                />
-              </div>
               <div className="col-lg-2" style={{ marginTop: "auto" }}>
                 <button type="submit" className="btn btn-success">
                   Submit

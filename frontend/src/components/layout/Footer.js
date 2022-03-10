@@ -5,7 +5,7 @@ import fakelogo from "../../assets/images/fakelogo.svg";
 const Footer = () => {
   return (
     <div className="footer">
-      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-0 border-top bg-dark">
+      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 bg-dark">
         <p className="container col-md-4 mb-0 text-muted d-flex justify-content-start">
           &copy; 2022 Beyra, Inc
         </p>
