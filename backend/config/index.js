@@ -24,12 +24,20 @@ module.exports = (app) => {
 
   // controls a very specific header to pass headers from the frontend
   // ! please configure the cors `origin` key so that you can accept the requests wherever they might be coming from
+  // app.use(
+  //   cors({
+  //     credentials: true,
+  //     origin: process.env.ORIGIN || "http://localhost:3000",
+  //   })
+  // );
   app.use(
     cors({
       credentials: true,
-      origin: process.env.ORIGIN || "http://localhost:3000",
+      origin: process.env.FRONTEND_URL || "http://localhost:3000",
     })
   );
+  // PUT THIS BACK IN ENV
+  // FRONTEND_URL=https://react-money-app.netlify.app
 
   // In development environment the app logs
   app.use(logger("dev"));

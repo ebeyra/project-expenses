@@ -12,3 +12,7 @@
 .full-screen > * {
   min-height: calc(100vh - 162px);
 }
+
+.btnColor {
+  color: #e0b646;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import statistics from "../../assets/images/statistics.svg";
 import screenshotH1 from "../../assets/images/screenshotH1.png";
+import screenshotH2 from "../../assets/images/screenshotH2.png";
 
 const Main = () => {
   return (
@@ -95,7 +96,7 @@ const Main = () => {
               <h2 className="text-start py-3">Track</h2>
               <p className="text-start">
                 Adding transaction details is quick and easy. Track your
-                spending categories and keep track of your budget in real time.
+                spending categories and check progress towards your budget in real time.
               </p>
             </div>
           </div>
@@ -123,17 +124,16 @@ const Main = () => {
           </div>
         </div>
       </div>
-      <div className="cover-container py-3 bg-dark text-light">
-        <div className="row container col-xxl-8 mx-auto p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 shadow-lg">
+      <div className="cover-container py-5 bg-dark text-light">
+        <div className="row container col-xxl-8 mx-auto p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3">
           <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
             <h1 className="display-5 fw-bold lh-1 mb-3 text-start">
-              Border hero with cropped image and shadows
+              Get Organized
             </h1>
             <p className="lead text-start">
-              Quickly design and customize responsive mobile-first sites with
-              Bootstrap, the world’s most popular front-end open source toolkit,
-              featuring Sass variables and mixins, responsive grid system,
-              extensive prebuilt components, and powerful JavaScript plugins.
+              Pre-defined budget categories will help remove the guesswork for
+              you. Choose your spend goals and update them at any time if
+              needed.
             </p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
               <Link
@@ -151,6 +151,36 @@ const Main = () => {
               alt="example budget"
               width="720"
             />
+          </div>
+        </div>
+      </div>
+      <div className="cover-container py-3">
+        <div className="px-4 pt-5 my-5 text-center border-bottom">
+          <h1 className="display-4 fw-bold">Manage Your Spend</h1>
+          <div className="col-lg-6 mx-auto">
+            <p className="lead mb-4">
+              Adding expenses as you go will help create a view of your spending habits and let you have more control over your progress.
+            </p>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <Link
+                to="/signup"
+                className="text-decoration-none text-light btn btn-success btn-lg px-4 me-md-2"
+              >
+                Show me
+              </Link>
+            </div>
+          </div>
+          <div className="overflow-hidden" style={{ maxHeight: "30vh" }}>
+            <div className="container px-5">
+              <img
+                src={screenshotH2}
+                className="img-fluid border rounded-3 shadow-lg mb-4"
+                alt="example transactions"
+                width="800"
+                height="500"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>
