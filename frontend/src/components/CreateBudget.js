@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { post, get } from "../http/service";
 import { Link } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
+import screenshotH1 from "../assets/images/screenshotH1.png";
 
 const CreateBudget = () => {
   const [userInfo, setUserInfo] = React.useState("");
@@ -106,28 +107,26 @@ const CreateBudget = () => {
           </div>
         </div>
         {/* Page content start */}
-        <div>
-          <div
-            className="container-xl px-4 mt-3"
-            style={{ maxWidth: "1100px" }}
-          >
-            <div className="card">
-              <div className="card-header">
-                <h2>Getting Started With a Budget</h2>
-              </div>
-              <div className="card-body">
-                <p>
-                  Use our template guide below to start tracking your spending
-                  and stay in control.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="container col">
+          <h3 className="mt-5">Start With a Budget</h3>
+          <p className="w-50 mx-auto">
+            Use our template guide below to start tracking your spending and
+            stay in control. Not sure what amount you want to set? You can come
+            back and edit your budget any time.
+          </p>
           {/* Form container start */}
           <div
-            className="container align-center my-4 border rounded border-success"
-            style={{ maxWidth: "900px" }}
+            className="container col align-center my-3 border rounded d-flex py-5 justify-content-evenly"
+            style={{ maxWidth: "1000px" }}
           >
+            <div className="col-lg-4 offset-lg-1 overflow-hidden shadow-lg ms-0">
+              <img
+                className="rounded-lg-3"
+                src={screenshotH1}
+                alt="example"
+                style={{ width: "839px" }}
+              />
+            </div>
             <div className="row">
               <form
                 className="text-start my-5 d-flex align-items-center justify-content-evenly"
@@ -202,7 +201,7 @@ const CreateBudget = () => {
                     />
                   </div>
                 </div>
-                <div className="flex-column">
+                <div className="ms-5">
                   <div className="form-group col-sm-12 my-2">
                     <label htmlFor="mobile">Mobile</label>
                     <input
@@ -258,7 +257,7 @@ const CreateBudget = () => {
                       onChange={(e) => setOther(e.target.value)}
                     />
                   </div>
-                  <button type="submit" className="btn btn-success my-3">
+                  <button type="submit" className="btn btn-success my-3 ms-5">
                     Create Budget
                   </button>
                 </div>

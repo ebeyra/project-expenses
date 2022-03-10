@@ -1,7 +1,7 @@
 import React from "react";
 import fakelogo from "../assets/images/fakelogo.svg";
 import { post } from "../http/service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = React.useState("");
@@ -103,6 +103,9 @@ const Signup = () => {
             />
           </div>
         </div>
+        <div className="mt-2">
+          <Link to="/signup"> Already have an account? Click here to sign in. </Link>
+          </div>
         <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
           Sign Up
         </button>

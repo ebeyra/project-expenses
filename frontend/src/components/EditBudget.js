@@ -121,17 +121,15 @@ const EditBudget = () => {
           </div>
         </div>
         {/* Page content start */}
-        <div>
+        <div className="container col">
           <div
             className="container-xl px-4 mt-3"
             style={{ maxWidth: "1100px" }}
           >
-            <div className="card">
-              <div className="card-header">
-                <h2>Updating Your Budget</h2>
-              </div>
-              <div className="card-body">
-                <p>
+            <div className="px-4 pt-3 my-4 text-center border-bottom">
+              <h3>Edit Your Budget</h3>
+              <div className="col-lg-8 mx-auto">
+                <p className="mb-4">
                   New changes to keep track of? Update your budget below to stay
                   current.
                 </p>

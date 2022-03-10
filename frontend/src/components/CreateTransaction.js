@@ -3,6 +3,7 @@ import { post, get } from "../http/service";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "./utility/globalfunctions";
 import { categoryEnum } from "./utility/globalfunctions";
+import screenshotH2 from "../assets/images/screenshotH2.png"
 
 const CreateTransaction = () => {
   const [userInfo, setUserInfo] = React.useState("");
@@ -103,12 +104,32 @@ const CreateTransaction = () => {
         </div>
         {/* Form container start */}
         <div className="container w-75 mt-4">
+          <div className="px-4 pt-5 my-5 text-center border-bottom">
+            <h3>Add Your First Expense</h3>
+            <div className="col-lg-6 mx-auto">
+              <p className="mb-4">
+                Enter transaction details below to start tracking your progress and manage spending habits. Ready to enter more than one? You can continue adding additional expenses on the next page.
+              </p>
+            </div>
+            <div className="overflow-hidden" style={{ maxHeight: "30vh" }}>
+              <div className="container px-5">
+                <img
+                  src={screenshotH2}
+                  className="img-fluid border rounded-3 shadow-lg mb-4"
+                  alt="sample"
+                  width="700"
+                  height="500"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
           <div className="row">
             <form
               className="row gx-3 gy-2 align-items-center justify-content-center text-start col-12"
               onSubmit={createTransaction}
             >
-              <h4>Add a Transaction</h4>
+              <h4 className="ms-5">Create Transaction</h4>
               <div className="col-lg-2">
                 <label className="" htmlFor="transaction-date">
                   Date

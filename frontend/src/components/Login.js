@@ -1,7 +1,7 @@
 import React from "react";
 import { get, post } from "../http/service";
 import fakelogo from "../assets/images/fakelogo.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = React.useState("");
@@ -83,13 +83,10 @@ const Login = () => {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
+          <div className="mt-2">
+          <Link to="/signup"> New to Iron Money? Click here to sign up. </Link>
           </div>
-          <button className="w-100 btn btn-lg btn-success" type="submit">
+          <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
             Sign in
           </button>
           <p className="mt-5 mb-3 text-muted">&copy; 2022</p>

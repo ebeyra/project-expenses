@@ -98,12 +98,20 @@ const EditTransaction = () => {
         {/* Form container start */}
         <div className="col py-3">
           <div className="container w-75 mt-4">
+          <div className="px-4 pt-3 my-4 text-center border-bottom">
+              <h3>Edit Transaction</h3>
+              <div className="col-lg-8 mx-auto">
+                <p className="mb-4">
+                  Modify transaction details below. Unchanged entries can be left blank.
+                </p>
+              </div>
+            </div>
             <div className="row">
               <form
                 className="row gx-3 gy-2 align-items-center justify-content-center text-start col-12"
                 onSubmit={editTransaction}
               >
-                <h4>Edit Transaction</h4>
+                <h6 className="ms-5">Edit Details</h6>
                 <div className="col-lg-2">
                   <label className="" htmlFor="transaction-date">
                     Date
