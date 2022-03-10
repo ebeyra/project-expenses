@@ -636,6 +636,25 @@ const Hub = () => {
             </div>
           </div>
           <div>
+            {/*             */}
+            {/*             */}
+            {/*    SEARCH   */}
+            {/*             */}
+            {/*             */}
+            <div className="col-lg-2">
+              <label htmlFor="transaction-search">Quick Search</label>
+              <input
+                className="form-control"
+                type="text"
+                id="transaction-search"
+                placeholder="Search Memos"
+                // value={""}
+                onChange={(e) => {
+                  filteredTransactions(e.target.value);
+                }}
+              />
+            </div>
+            <div>|</div>
             {/*                         */}
             {/*                         */}
             {/*   TRANSACTION SECTION   */}
@@ -696,24 +715,6 @@ const Hub = () => {
                         placeholder="Note"
                         value={memo}
                         onChange={(e) => setMemo(e.target.value)}
-                      />
-                    </div>
-                    {/*             */}
-                    {/*             */}
-                    {/*    SEARCH   */}
-                    {/*             */}
-                    {/*             */}
-                    <div className="col-lg-2">
-                      <label htmlFor="transaction-search">Quick Search</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="transaction-search"
-                        placeholder="Search Memos"
-                        // value={""}
-                        onChange={(e) => {
-                          filteredTransactions(e.target.value);
-                        }}
                       />
                     </div>
                     <div className="col-xl-2" style={{ marginTop: "auto" }}>

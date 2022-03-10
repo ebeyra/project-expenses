@@ -1,5 +1,5 @@
 import React from "react";
-import { get, post } from "../http/service";
+import { post } from "../http/service";
 import fakelogo from "../assets/images/fakelogo.svg";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -23,27 +23,6 @@ const Login = () => {
       .catch((err) => {
         console.error(err.message);
       });
-  };
-
-  const checkToken = () => {
-    let thing = localStorage.getItem("token");
-    console.log("This was stored in our localStorage", thing);
-  };
-
-  const checkIfLoggedIn = (e) => {
-    e.preventDefault();
-    get("/users/profile")
-      .then((results) => {
-        console.log("log in?", results.data);
-      })
-      .catch((err) => {
-        console.error(err.message);
-      });
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    console.log("You have logged out");
   };
 
   return (
@@ -84,7 +63,10 @@ const Login = () => {
             <label htmlFor="floatingPassword">Password</label>
           </div>
           <div className="mt-2">
-          <Link to="/signup"> New to Iron Money? Click here to sign up. </Link>
+            <Link to="/signup">
+              {" "}
+              New to Iron Money? Click here to sign up.{" "}
+            </Link>
           </div>
           <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
             Sign in
