@@ -67,20 +67,26 @@ const CreateBudget = () => {
               id="menu"
             >
               <li>
-                <Link to="/hub" className="nav-link px-0 align-middle">
+                {/* <Link
+                  to="/hub"
+                  className="nav-link px-0 align-middle"
+                >
                   <i className="fs-4 bi-speedometer2 text-white"></i>{" "}
                   <span className="ms-1 d-none d-sm-inline text-white">
                     Summary
                   </span>{" "}
-                </Link>
+                </Link> */}
               </li>
               <li>
-                <Link to="/profile" className="nav-link px-0 align-middle">
+                {/* <Link
+                  to="/profile"
+                  className="nav-link px-0 align-middle"
+                >
                   <i className="fs-4 bi-person-lines-fill text-white"></i>{" "}
                   <span className="ms-1 d-none d-sm-inline text-white">
                     Profile
                   </span>{" "}
-                </Link>
+                </Link> */}
               </li>
             </ul>
             <hr />

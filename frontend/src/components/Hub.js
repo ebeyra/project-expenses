@@ -636,25 +636,6 @@ const Hub = () => {
             </div>
           </div>
           <div>
-            {/*             */}
-            {/*             */}
-            {/*    SEARCH   */}
-            {/*             */}
-            {/*             */}
-            <div className="col-lg-2">
-              <label htmlFor="transaction-search">Quick Search</label>
-              <input
-                className="form-control"
-                type="text"
-                id="transaction-search"
-                placeholder="Search Memos"
-                // value={""}
-                onChange={(e) => {
-                  filteredTransactions(e.target.value);
-                }}
-              />
-            </div>
-            <div>|</div>
             {/*                         */}
             {/*                         */}
             {/*   TRANSACTION SECTION   */}
@@ -667,6 +648,32 @@ const Hub = () => {
                     className="row gx-3 mt-4 align-items-center justify-content-start text-start col-12"
                     onSubmit={createTransaction}
                   >
+                    {/*             */}
+                    {/*             */}
+                    {/*    SEARCH   */}
+                    {/*             */}
+                    {/*             */}
+                    <div className="col-lg-1">
+                      <label htmlFor="transaction-search">Search</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="transaction-search"
+                        placeholder="Memos"
+                        // value={""}
+                        onChange={(e) => {
+                          filteredTransactions(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="dividerBar mx-3" style={{ width: "10px" }}>
+                      |
+                    </div>
+                    {/*                 */}
+                    {/*                 */}
+                    {/*   Transactions  */}
+                    {/*                 */}
+                    {/*                 */}
                     <div className="col-lg-2">
                       <label htmlFor="transaction-date">Date</label>
                       <input

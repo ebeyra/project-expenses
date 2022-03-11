@@ -13,6 +13,7 @@
   min-height: calc(100vh - 162px);
 }
 
-.btnColor {
-  color: #e0b646;
+.dividerBar {
+  font-size: 2.5em;
+  transform: scale(0.5, 2);
 }
