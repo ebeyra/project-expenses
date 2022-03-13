@@ -104,8 +104,11 @@ const Signup = () => {
           </div>
         </div>
         <div className="mt-2">
-          <Link to="/signup"> Already have an account? Click here to sign in. </Link>
-          </div>
+          <Link to="/login">
+            {" "}
+            Already have an account? Click here to sign in.{" "}
+          </Link>
+        </div>
         <button className="w-100 btn btn-lg btn-success mt-3" type="submit">
           Sign Up
         </button>
